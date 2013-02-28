@@ -11,7 +11,7 @@
 #import "Tag+Flickr.h"
 
 @interface SpotViewController ()
-
+@property (atomic) NSArray* tags;
 @end
 
 @implementation SpotViewController
@@ -32,23 +32,25 @@
     return [paths objectAtIndex:0];
 }
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tags = @[];
     
     UIManagedDocument *document = [[UIManagedDocument alloc] initWithFileURL:[self dataURL]];
     void (^completionHandler)(BOOL)= ^(BOOL success) {
         if (!success) {
+            //TODO um, wat?
             NSLog(@"Uh oh, there was an error.");
         }
         NSLog(@"Successfully loaded the thingy!");
         
-        NSLog(@"%@", [Tag getAllTagsAsStringArray:document]);
+        self.tags = [Tag getAllTags:document];
         
-        //[Photo addPhoto:document data:NULL];
+        [self.tableView reloadData];
         
         /*
+         //TODO..mebbe
         [document saveToURL:[self dataURL] forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
             NSLog(@"Saved, presumably.");
         }];
@@ -60,9 +62,6 @@
     } else {
         [document saveToURL:[self dataURL] forSaveOperation:UIDocumentSaveForCreating completionHandler:completionHandler];
     }
-    
-    NSLog(@"Hello world!");
-	// Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,5 +69,30 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.tags.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    int index = [indexPath row];
+    Tag *tag = [self.tags objectAtIndex:index];
+    
+    cell.textLabel.text = tag.name;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d photos", tag.photos.count];
+    
+    return cell;
+}
+
 
 @end
