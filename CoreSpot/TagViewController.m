@@ -10,6 +10,7 @@
 #import "Photo+Flickr.h"
 #import "Tag+Flickr.h"
 #import "DocumentManager.h"
+#import "ImageViewController.h"
 
 @interface TagViewController ()
 @property (weak, nonatomic) IBOutlet UINavigationItem *navigationBar;
@@ -23,7 +24,6 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
-        NSLog(@"Umm");
     }
     return self;
 }
@@ -35,8 +35,6 @@
     [[self activityIndicator] startAnimating];
     
     [DocumentManager withDocumentDo:^(UIManagedDocument* document){
-        NSLog(@"Loaded.");
-        
         self.imagesWithTag = [Tag getPhotosFromTag:self.tag.name document:document];
         NSLog(@"%d", self.imagesWithTag.count);
         
@@ -50,6 +48,24 @@
         */
     }];
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    int index = [self.tableView indexPathForSelectedRow].row;
+    Photo *photo = [self.imagesWithTag objectAtIndex:index];
+    NSString *url = photo.url;
+    NSString *title = photo.title;
+    
+    NSLog(@"Photo url is %@", url);
+    
+    ImageViewController *newController = (ImageViewController*)segue.destinationViewController;
+    
+    newController.imageURL = [NSURL URLWithString:url];
+    newController.imageTitle = title;
+    
+    photo.lastAccessed = [NSDate date];
+}
+
 
 #pragma mark - Table view data source
 

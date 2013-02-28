@@ -28,8 +28,10 @@
     NSDictionary *descDict = [data objectForKey:@"description"];
     
     newPhoto.title = [data objectForKey:@"title"];
-    newPhoto.url = [[FlickrFetcher urlForPhoto:data format:FlickrPhotoFormatLarge] path];
+    newPhoto.url = [[FlickrFetcher urlForPhoto:data format:FlickrPhotoFormatLarge] absoluteString];
     newPhoto.subtitle      = [descDict objectForKey:@"_content"];
+    
+    NSLog(@"%@", newPhoto.url);
     
     // For tags, grab the Tag object and add that to the set.
     
