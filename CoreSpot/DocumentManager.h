@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface DocumentManager : NSObject
-+ (void)withDocumentURL:(NSURL*)url do:(void(^)(UIManagedDocument*))block;
++ (void)withDocumentDo:(void(^)(UIManagedDocument*))block;
 @end

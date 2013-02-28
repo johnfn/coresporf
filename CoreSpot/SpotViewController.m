@@ -18,28 +18,13 @@
 
 @implementation SpotViewController
 
-// TODO - move somewhere more apposite
-- (NSURL*)dataURL {
-    NSURL *cachePath = [self rootCachePath];
-    
-    cachePath = [cachePath URLByAppendingPathComponent:@"photoData"];
-    cachePath = [cachePath URLByAppendingPathExtension:@"dat"];
-    
-    return cachePath;
-}
-
-- (NSURL*)rootCachePath {
-    NSFileManager *fileManager = [[NSFileManager alloc] init];
-    NSArray *paths = [fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask];
-    return [paths objectAtIndex:0];
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.tags = @[];
     
-    [DocumentManager withDocumentURL:[self dataURL] do:^(UIManagedDocument* document){
+    [DocumentManager withDocumentDo:^(UIManagedDocument* document){
         self.tags = [Tag getAllTags:document];
         
         [self.tableView reloadData];
@@ -62,6 +47,8 @@
 {
     int index = [self.tableView indexPathForSelectedRow].row;
     TagViewController *newController = (TagViewController*)segue.destinationViewController;
+    
+    NSLog(@"loaded new: %@", newController);
     
     newController.tag = [self.tags objectAtIndex:index];
 }

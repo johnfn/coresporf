@@ -36,7 +36,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="tvC-JG-3k2" kind="push" id="RT2-Du-2u7"/>
+                                    <segue destination="tvC-JG-3k2" kind="push" id="b02-Sm-qFz"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -97,8 +97,8 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="[will be filled out]" id="2Fv-Cy-h4z"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="ISV-kB-EvP" id="oAw-zh-kKO"/>
-                        <outlet property="navigationBar" destination="2Fv-Cy-h4z" id="Nj7-PK-zDP"/>
+                        <outlet property="activityIndicator" destination="ISV-kB-EvP" id="3o4-D2-emU"/>
+                        <outlet property="navigationBar" destination="2Fv-Cy-h4z" id="akH-BK-QWE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PQ4-vv-CyU" userLabel="First Responder" sceneMemberID="firstResponder"/>

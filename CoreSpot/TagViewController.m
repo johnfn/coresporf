@@ -8,8 +8,12 @@
 
 #import "TagViewController.h"
 #import "Photo+Flickr.h"
+#import "Tag+Flickr.h"
+#import "DocumentManager.h"
 
 @interface TagViewController ()
+@property (weak, nonatomic) IBOutlet UINavigationItem *navigationBar;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) NSArray* imagesWithTag;
 @end
 
@@ -19,8 +23,32 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        NSLog(@"Umm");
     }
     return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.imagesWithTag = @[];
+    [[self activityIndicator] startAnimating];
+    
+    [DocumentManager withDocumentDo:^(UIManagedDocument* document){
+        NSLog(@"Loaded.");
+        
+        self.imagesWithTag = [Tag getPhotosFromTag:self.tag.name document:document];
+        NSLog(@"%d", self.imagesWithTag.count);
+        
+        [[self activityIndicator] stopAnimating];
+        [self.tableView reloadData];
+        
+        /* TODO...
+        [document saveToURL:[self dataURL] forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL
+            NSLog(@"Saved, presumably.");
+        }];
+        */
+    }];
 }
 
 #pragma mark - Table view data source

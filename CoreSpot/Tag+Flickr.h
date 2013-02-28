@@ -12,4 +12,5 @@
 + (NSArray*)getAllTags:(UIManagedDocument *)document;
 + (NSArray*)getAllTagsAsStringArray:(UIManagedDocument*)document;
 + (Tag*)getTagByName:(NSString*)name document:(UIManagedDocument*)document;
++ (NSArray*)getPhotosFromTag:(NSString*)name document:(UIManagedDocument*)document;
 @end

@@ -38,6 +38,12 @@
     return tags;
 }
 
++ (NSArray*)getPhotosFromTag:(NSString*)name document:(UIManagedDocument*)document {
+    Tag* tag = [Tag getTagByName:name document:document];
+    
+    return [tag.photos allObjects];
+}
+
 + (NSArray*)getAllTagsAsStringArray:(UIManagedDocument*)document {
     NSArray* allTagObjects = [Tag getAllTags:document];
     NSMutableArray* result = [[NSMutableArray alloc] init];

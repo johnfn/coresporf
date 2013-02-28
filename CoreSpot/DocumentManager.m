@@ -13,7 +13,22 @@
 
 @implementation DocumentManager
 
-+ (void)withDocumentURL:(NSURL*)url do:(void(^)(UIManagedDocument*))block {
++ (NSURL*)dataURL {
+    NSURL *cachePath = [DocumentManager rootCachePath];
+    
+    cachePath = [cachePath URLByAppendingPathComponent:@"photoData"];
+    cachePath = [cachePath URLByAppendingPathExtension:@"dat"];
+    
+    return cachePath;
+}
+
++ (NSURL*)rootCachePath {
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    NSArray *paths = [fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask];
+    return [paths objectAtIndex:0];
+}
+
++ (void)withDocumentDo:(void(^)(UIManagedDocument*))block {
     static UIManagedDocument* document = nil;
 
     void (^completionHandler)(BOOL)= ^(BOOL success) {
@@ -26,12 +41,12 @@
     };
     
     if (document == nil) {
-        document = [[UIManagedDocument alloc] initWithFileURL:url];
+        document = [[UIManagedDocument alloc] initWithFileURL:[DocumentManager dataURL]];
         
-        if ([[NSFileManager defaultManager] fileExistsAtPath:[url path]]) {
+        if ([[NSFileManager defaultManager] fileExistsAtPath:[[DocumentManager dataURL] path]]) {
             [document openWithCompletionHandler:completionHandler];
         } else {
-            [document saveToURL:url forSaveOperation:UIDocumentSaveForCreating completionHandler:completionHandler];
+            [document saveToURL:[DocumentManager dataURL] forSaveOperation:UIDocumentSaveForCreating completionHandler:completionHandler];
         }
     } else {
         completionHandler(true);

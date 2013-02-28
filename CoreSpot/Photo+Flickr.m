@@ -41,8 +41,6 @@
         [newPhoto addTagObject:tag];
     }
     
-    NSLog(@"Newly created photo lookz like dis %@", newPhoto);
-    
     return newPhoto;
 }
 
