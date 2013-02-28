@@ -9,6 +9,8 @@
 #import "SpotViewController.h"
 #import "Photo+Flickr.h"
 #import "Tag+Flickr.h"
+#import "TagViewController.h"
+#import "DocumentManager.h"
 
 @interface SpotViewController ()
 @property (atomic) NSArray* tags;
@@ -37,37 +39,31 @@
     [super viewDidLoad];
     self.tags = @[];
     
-    UIManagedDocument *document = [[UIManagedDocument alloc] initWithFileURL:[self dataURL]];
-    void (^completionHandler)(BOOL)= ^(BOOL success) {
-        if (!success) {
-            //TODO um, wat?
-            NSLog(@"Uh oh, there was an error.");
-        }
-        NSLog(@"Successfully loaded the thingy!");
-        
+    [DocumentManager withDocumentURL:[self dataURL] do:^(UIManagedDocument* document){
         self.tags = [Tag getAllTags:document];
         
         [self.tableView reloadData];
         
-        /*
-         //TODO..mebbe
-        [document saveToURL:[self dataURL] forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
+        /* TODO...
+        [document saveToURL:[self dataURL] forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL
             NSLog(@"Saved, presumably.");
         }];
-         */
-    };
-    
-    if ([[NSFileManager defaultManager] fileExistsAtPath:[[self dataURL] path]]) {
-        [document openWithCompletionHandler:completionHandler];
-    } else {
-        [document saveToURL:[self dataURL] forSaveOperation:UIDocumentSaveForCreating completionHandler:completionHandler];
-    }
+        */
+    }];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    int index = [self.tableView indexPathForSelectedRow].row;
+    TagViewController *newController = (TagViewController*)segue.destinationViewController;
+    
+    newController.tag = [self.tags objectAtIndex:index];
 }
 
 #pragma mark - Table view data source

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B44741316DF6F5B000CF4F9 /* TagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B44741216DF6F5B000CF4F9 /* TagViewController.m */; };
+		8B44741616DFEE95000CF4F9 /* DocumentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B44741516DFEE95000CF4F9 /* DocumentManager.m */; };
 		8B6632BD16DF065F00862119 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6632BC16DF065F00862119 /* UIKit.framework */; };
 		8B6632BF16DF065F00862119 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6632BE16DF065F00862119 /* Foundation.framework */; };
 		8B6632C116DF065F00862119 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6632C016DF065F00862119 /* CoreGraphics.framework */; };
@@ -31,6 +33,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B44741116DF6F5B000CF4F9 /* TagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagViewController.h; sourceTree = "<group>"; };
+		8B44741216DF6F5B000CF4F9 /* TagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagViewController.m; sourceTree = "<group>"; };
+		8B44741416DFEE95000CF4F9 /* DocumentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentManager.h; sourceTree = "<group>"; };
+		8B44741516DFEE95000CF4F9 /* DocumentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentManager.m; sourceTree = "<group>"; };
 		8B6632B816DF065F00862119 /* CoreSpot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreSpot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B6632BC16DF065F00862119 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8B6632BE16DF065F00862119 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -119,6 +125,8 @@
 				8B6632CB16DF065F00862119 /* SpotAppDelegate.h */,
 				8B6632CC16DF065F00862119 /* SpotAppDelegate.m */,
 				8B6632D416DF065F00862119 /* MainStoryboard_iPhone.storyboard */,
+				8B44741116DF6F5B000CF4F9 /* TagViewController.h */,
+				8B44741216DF6F5B000CF4F9 /* TagViewController.m */,
 				8B6632E616DF147900862119 /* PhotoModel.xcdatamodeld */,
 				8B6632D716DF065F00862119 /* MainStoryboard_iPad.storyboard */,
 				8B6632DA16DF065F00862119 /* SpotViewController.h */,
@@ -145,6 +153,8 @@
 		8B6632E916DF23C300862119 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8B44741416DFEE95000CF4F9 /* DocumentManager.h */,
+				8B44741516DFEE95000CF4F9 /* DocumentManager.m */,
 				8B66331716DF5E7500862119 /* Photo.h */,
 				8B66331816DF5E7600862119 /* Photo.m */,
 				8B66330E16DF53BD00862119 /* Tag.h */,
@@ -241,6 +251,8 @@
 				8B66331016DF53BD00862119 /* Tag.m in Sources */,
 				8B66331316DF53F800862119 /* Tag+Flickr.m in Sources */,
 				8B66331916DF5E7600862119 /* Photo.m in Sources */,
+				8B44741316DF6F5B000CF4F9 /* TagViewController.m in Sources */,
+				8B44741616DFEE95000CF4F9 /* DocumentManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +378,7 @@
 				8B6632E116DF065F00862119 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
