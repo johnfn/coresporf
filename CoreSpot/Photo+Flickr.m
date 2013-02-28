@@ -30,8 +30,7 @@
     newPhoto.title = [data objectForKey:@"title"];
     newPhoto.url = [[FlickrFetcher urlForPhoto:data format:FlickrPhotoFormatLarge] absoluteString];
     newPhoto.subtitle      = [descDict objectForKey:@"_content"];
-    
-    NSLog(@"%@", newPhoto.url);
+    newPhoto.lastAccessed  = nil;
     
     // For tags, grab the Tag object and add that to the set.
     
@@ -59,6 +58,24 @@
         [Photo reloadPhotos:document];
         return [context executeFetchRequest:request error:&error];
     }
+}
+
++ (NSArray*)getRecentPhotos:(UIManagedDocument*)document {
+    NSArray *allPhotos = [Photo getAllPhotos:document];
+    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"lastAccessed" ascending:NO];
+    NSArray *sortedArray = [allPhotos sortedArrayUsingDescriptors:@[descriptor]];
+    NSArray *first10 = [sortedArray subarrayWithRange:NSMakeRange(0, 10)];
+    
+    // Exclude results with nil lastAccessed. They have never been accessed.
+    
+    NSMutableArray *noNils = [[NSMutableArray alloc] init];
+    
+    for (Photo* p in first10) {
+        if (p.lastAccessed == nil) continue;
+        [noNils addObject:p];
+    }
+    
+    return noNils;
 }
 
 + (void)reloadPhotos:(UIManagedDocument *)document {

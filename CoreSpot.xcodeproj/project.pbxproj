@@ -30,6 +30,7 @@
 		8B66331016DF53BD00862119 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B66330F16DF53BD00862119 /* Tag.m */; };
 		8B66331316DF53F800862119 /* Tag+Flickr.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B66331216DF53F800862119 /* Tag+Flickr.m */; };
 		8B66331916DF5E7600862119 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B66331816DF5E7600862119 /* Photo.m */; };
+		8B95FBB416DFFD4A00BE675C /* RecentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B95FBB316DFFD4A00BE675C /* RecentViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +72,8 @@
 		8B66331216DF53F800862119 /* Tag+Flickr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Tag+Flickr.m"; sourceTree = "<group>"; };
 		8B66331716DF5E7500862119 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		8B66331816DF5E7600862119 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		8B95FBB216DFFD4A00BE675C /* RecentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentViewController.h; sourceTree = "<group>"; };
+		8B95FBB316DFFD4A00BE675C /* RecentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +134,8 @@
 				8B6632D716DF065F00862119 /* MainStoryboard_iPad.storyboard */,
 				8B6632DA16DF065F00862119 /* SpotViewController.h */,
 				8B6632DB16DF065F00862119 /* SpotViewController.m */,
+				8B95FBB216DFFD4A00BE675C /* RecentViewController.h */,
+				8B95FBB316DFFD4A00BE675C /* RecentViewController.m */,
 				8B6632C316DF065F00862119 /* Supporting Files */,
 			);
 			path = CoreSpot;
@@ -253,6 +258,7 @@
 				8B66331916DF5E7600862119 /* Photo.m in Sources */,
 				8B44741316DF6F5B000CF4F9 /* TagViewController.m in Sources */,
 				8B44741616DFEE95000CF4F9 /* DocumentManager.m in Sources */,
+				8B95FBB416DFFD4A00BE675C /* RecentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
