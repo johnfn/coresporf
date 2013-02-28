@@ -79,6 +79,12 @@
     return self.imagesWithTag.count;
 }
 
+- (void)finishedLoading:(NSArray*)data {
+    UITableViewCell *cell = data[0];
+    UIImage *img = data[1];
+    cell.imageView.image = img;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"TagCell";
@@ -88,7 +94,13 @@
     
     cell.textLabel.text = p.title;
     cell.detailTextLabel.text = p.subtitle;
-    cell.imageView.image = [p getThumbnail];
+    
+    dispatch_queue_t downloadQueue = dispatch_queue_create("image fetcher", NULL);
+    dispatch_async(downloadQueue, ^{
+        [self performSelectorOnMainThread:@selector(finishedLoading:)
+                               withObject:@[cell, [p getThumbnail]]
+                            waitUntilDone:YES];
+    });
     
     return cell;
 }
