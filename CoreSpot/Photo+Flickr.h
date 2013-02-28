@@ -9,6 +9,6 @@
 #import "Photo.h"
 
 @interface Photo (Flickr)
-+ (Photo*)addPhoto:(UIManagedDocument *)document:(NSDictionary*)data;
++ (Photo*)addPhoto:(UIManagedDocument *)document data:(NSDictionary*)data;
 + (NSArray*)getAllPhotos:(UIManagedDocument *)document;
 @end

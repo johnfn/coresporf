@@ -7,6 +7,7 @@
 //
 
 #import "SpotViewController.h"
+#import "Photo+Flickr.h"
 
 @interface SpotViewController ()
 
@@ -35,14 +36,23 @@
 {
     [super viewDidLoad];
     
+    UIManagedDocument *document = [[UIManagedDocument alloc] initWithFileURL:[self dataURL]];
     void (^completionHandler)(BOOL)= ^(BOOL success) {
         if (!success) {
             NSLog(@"Uh oh, there was an error.");
         }
         NSLog(@"Successfully loaded the thingy!");
+        
+        Photo *p = [Photo getAllPhotos:document][0];
+        NSLog(@"%@", p.title);
+        
+        //[Photo addPhoto:document data:NULL];
+        
+        [document saveToURL:[self dataURL] forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
+            NSLog(@"Saved, presumably.");
+        }];
     };
     
-    UIManagedDocument *document = [[UIManagedDocument alloc] initWithFileURL:[self dataURL]];
     if ([[NSFileManager defaultManager] fileExistsAtPath:[[self dataURL] path]]) {
         [document openWithCompletionHandler:completionHandler];
     } else {

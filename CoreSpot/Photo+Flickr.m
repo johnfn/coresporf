@@ -9,7 +9,7 @@
 #import "Photo+Flickr.h"
 
 @implementation Photo (Flickr)
-+ (Photo*)addPhoto:(UIManagedDocument *)document:(NSDictionary*)data {
++ (Photo*)addPhoto:(UIManagedDocument *)document data:(NSDictionary*)data {
     NSManagedObjectContext *context = document.managedObjectContext;
     Photo* newPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:context];
     newPhoto.title = @"Herpderp";
@@ -20,6 +20,7 @@
 + (NSArray*)getAllPhotos:(UIManagedDocument *)document {
     NSManagedObjectContext *context = document.managedObjectContext;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Photo"];
+    [request setReturnsObjectsAsFaults:NO];
     NSError *error;
     NSArray *photos = [context executeFetchRequest:request error:&error];
     
