@@ -15,7 +15,7 @@
     NSManagedObjectContext *context = document.managedObjectContext;
     Tag* newTag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:context];
     
-    newTag.name = name;
+    newTag.name = [name capitalizedString];
     
     return newTag;
 }
@@ -39,6 +39,7 @@
 }
 
 + (Tag*)getTagByName:(NSString*)name document:(UIManagedDocument*)document {
+    name = [name capitalizedString];
     NSManagedObjectContext *context = document.managedObjectContext;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Tag"];
     request.predicate = [NSPredicate predicateWithFormat:@"name = %@", name];

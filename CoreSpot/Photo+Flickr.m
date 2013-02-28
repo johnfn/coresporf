@@ -7,6 +7,7 @@
 //
 
 #import "Photo+Flickr.h"
+#import "Tag+Flickr.h"
 #import "FlickrFetcher.h"
 
 @implementation Photo (Flickr)
@@ -30,15 +31,17 @@
     newPhoto.url = [[FlickrFetcher urlForPhoto:data format:FlickrPhotoFormatLarge] path];
     newPhoto.subtitle      = [descDict objectForKey:@"_content"];
     
-    // For tags, construct a set of Tag objects.
+    // For tags, grab the Tag object and add that to the set.
     
-    NSMutableSet *result = [[NSMutableSet alloc] init];
     NSString* tags = [data objectForKey:@"tags"];
     NSArray* split = [tags componentsSeparatedByString:@" "];
     
     for (NSString *s in split) {
-        [result addObject:[s capitalizedString]];
+        Tag *tag = [Tag getTagByName:s document:document];
+        [newPhoto addTagObject:tag];
     }
+    
+    NSLog(@"Newly created photo lookz like dis %@", newPhoto);
     
     return newPhoto;
 }

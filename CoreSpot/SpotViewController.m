@@ -43,8 +43,7 @@
         }
         NSLog(@"Successfully loaded the thingy!");
         
-        Photo *p = [Photo getAllPhotos:document][0];
-        NSLog(@"%@", p.title);
+        NSLog(@"%@", [Photo getAllPhotos:document]);
         
         //[Photo addPhoto:document data:NULL];
         
