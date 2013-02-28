@@ -7,12 +7,38 @@
 //
 
 #import "Photo+Flickr.h"
+#import "FlickrFetcher.h"
 
 @implementation Photo (Flickr)
+
++ (NSArray*)allPictures {
+    static NSArray* pictures = nil;
+    
+    if (pictures == nil) {
+        pictures = [FlickrFetcher stanfordPhotos];
+    }
+    
+    return pictures;
+}
+
 + (Photo*)addPhoto:(UIManagedDocument *)document data:(NSDictionary*)data {
     NSManagedObjectContext *context = document.managedObjectContext;
     Photo* newPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:context];
-    newPhoto.title = @"Herpderp";
+    NSDictionary *descDict = [data objectForKey:@"description"];
+    
+    newPhoto.title = [data objectForKey:@"title"];
+    newPhoto.url = [[FlickrFetcher urlForPhoto:data format:FlickrPhotoFormatLarge] path];
+    newPhoto.subtitle      = [descDict objectForKey:@"_content"];
+    
+    // For tags, construct a set of Tag objects.
+    
+    NSMutableSet *result = [[NSMutableSet alloc] init];
+    NSString* tags = [data objectForKey:@"tags"];
+    NSArray* split = [tags componentsSeparatedByString:@" "];
+    
+    for (NSString *s in split) {
+        [result addObject:[s capitalizedString]];
+    }
     
     return newPhoto;
 }
@@ -24,7 +50,28 @@
     NSError *error;
     NSArray *photos = [context executeFetchRequest:request error:&error];
     
-    return photos;
+    if (photos.count > 0) {
+        return photos;
+    } else {
+        [Photo reloadPhotos:document];
+        return [context executeFetchRequest:request error:&error];
+    }
+}
+
++ (void)reloadPhotos:(UIManagedDocument *)document {
+    NSManagedObjectContext *context = document.managedObjectContext;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Photo"];
+    NSArray *photos = [context executeFetchRequest:request error:NULL];
+    
+    // Remove all photos that exist
+    for (Photo *p in photos) {
+        [document.managedObjectContext deleteObject:p];
+    }
+    
+    // Now, add all photos.
+    for (NSDictionary *dict in [Photo allPictures]) {
+        [Photo addPhoto:document data:dict];
+    }
 }
 
 @end
