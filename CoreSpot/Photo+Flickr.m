@@ -12,6 +12,15 @@
 
 @implementation Photo (Flickr)
 
+- (UIImage*)getThumbnail {
+    if (self.thumbnail == nil) {
+        self.thumbnail = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.thumbnailUrl]];
+    }
+    
+    return [[UIImage alloc]initWithData:self.thumbnail];
+    
+}
+
 + (NSArray*)allPictures {
     static NSArray* pictures = nil;
     
@@ -29,6 +38,7 @@
     
     newPhoto.title = [data objectForKey:@"title"];
     newPhoto.url = [[FlickrFetcher urlForPhoto:data format:FlickrPhotoFormatLarge] absoluteString];
+    newPhoto.thumbnailUrl = [[FlickrFetcher urlForPhoto:data format:FlickrPhotoFormatSquare] absoluteString];
     newPhoto.subtitle      = [descDict objectForKey:@"_content"];
     newPhoto.lastAccessed  = nil;
     

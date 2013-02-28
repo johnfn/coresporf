@@ -47,8 +47,6 @@
 {
     [super viewDidLoad];
     
-    NSLog(@"ImageViewDidLoad!");
-    
     self.scrollView.minimumZoomScale = 1.0;
     self.scrollView.maximumZoomScale = 2.0;
     

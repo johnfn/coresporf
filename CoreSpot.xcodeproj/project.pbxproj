@@ -29,8 +29,8 @@
 		8B66330A16DF411E00862119 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B66330916DF411E00862119 /* CoreData.framework */; };
 		8B66331016DF53BD00862119 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B66330F16DF53BD00862119 /* Tag.m */; };
 		8B66331316DF53F800862119 /* Tag+Flickr.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B66331216DF53F800862119 /* Tag+Flickr.m */; };
-		8B66331916DF5E7600862119 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B66331816DF5E7600862119 /* Photo.m */; };
 		8B95FBB416DFFD4A00BE675C /* RecentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B95FBB316DFFD4A00BE675C /* RecentViewController.m */; };
+		8B95FBBE16E0188A00BE675C /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B95FBBD16E0188A00BE675C /* Photo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,10 +70,10 @@
 		8B66330F16DF53BD00862119 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
 		8B66331116DF53F800862119 /* Tag+Flickr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Tag+Flickr.h"; sourceTree = "<group>"; };
 		8B66331216DF53F800862119 /* Tag+Flickr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Tag+Flickr.m"; sourceTree = "<group>"; };
-		8B66331716DF5E7500862119 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
-		8B66331816DF5E7600862119 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		8B95FBB216DFFD4A00BE675C /* RecentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentViewController.h; sourceTree = "<group>"; };
 		8B95FBB316DFFD4A00BE675C /* RecentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentViewController.m; sourceTree = "<group>"; };
+		8B95FBBC16E0188A00BE675C /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		8B95FBBD16E0188A00BE675C /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,10 +158,10 @@
 		8B6632E916DF23C300862119 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8B95FBBC16E0188A00BE675C /* Photo.h */,
+				8B95FBBD16E0188A00BE675C /* Photo.m */,
 				8B44741416DFEE95000CF4F9 /* DocumentManager.h */,
 				8B44741516DFEE95000CF4F9 /* DocumentManager.m */,
-				8B66331716DF5E7500862119 /* Photo.h */,
-				8B66331816DF5E7600862119 /* Photo.m */,
 				8B66330E16DF53BD00862119 /* Tag.h */,
 				8B66331116DF53F800862119 /* Tag+Flickr.h */,
 				8B66331216DF53F800862119 /* Tag+Flickr.m */,
@@ -255,10 +255,10 @@
 				8B66330516DF35D400862119 /* Photo+Flickr.m in Sources */,
 				8B66331016DF53BD00862119 /* Tag.m in Sources */,
 				8B66331316DF53F800862119 /* Tag+Flickr.m in Sources */,
-				8B66331916DF5E7600862119 /* Photo.m in Sources */,
 				8B44741316DF6F5B000CF4F9 /* TagViewController.m in Sources */,
 				8B44741616DFEE95000CF4F9 /* DocumentManager.m in Sources */,
 				8B95FBB416DFFD4A00BE675C /* RecentViewController.m in Sources */,
+				8B95FBBE16E0188A00BE675C /* Photo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

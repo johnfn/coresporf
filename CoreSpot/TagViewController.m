@@ -56,8 +56,6 @@
     NSString *url = photo.url;
     NSString *title = photo.title;
     
-    NSLog(@"Photo url is %@", url);
-    
     ImageViewController *newController = (ImageViewController*)segue.destinationViewController;
     
     newController.imageURL = [NSURL URLWithString:url];
@@ -90,6 +88,7 @@
     
     cell.textLabel.text = p.title;
     cell.detailTextLabel.text = p.subtitle;
+    cell.imageView.image = [p getThumbnail];
     
     return cell;
 }
