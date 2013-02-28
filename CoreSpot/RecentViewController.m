@@ -68,6 +68,7 @@
     return self.recentPhotos.count;
 }
 
+/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"RecentCell";
@@ -77,6 +78,34 @@
     
     cell.textLabel.text = photo.title;
     cell.detailTextLabel.text = photo.subtitle;
+    
+    return cell;
+}
+ */
+
+
+- (void)finishedLoading:(NSArray*)data {
+    UITableViewCell *cell = data[0];
+    UIImage *img = data[1];
+    cell.imageView.image = img;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"RecentCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    int index = [indexPath row];
+    Photo *photo = [self.recentPhotos objectAtIndex:index];
+    
+    cell.textLabel.text = photo.title;
+    cell.detailTextLabel.text = photo.subtitle;
+    
+    dispatch_queue_t downloadQueue = dispatch_queue_create("image fetcher", NULL);
+    dispatch_async(downloadQueue, ^{
+        [self performSelectorOnMainThread:@selector(finishedLoading:)
+                               withObject:@[cell, [photo getThumbnail]]
+                            waitUntilDone:YES];
+    });
     
     return cell;
 }
