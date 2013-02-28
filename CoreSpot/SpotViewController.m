@@ -14,9 +14,40 @@
 
 @implementation SpotViewController
 
+// TODO - move somewhere more apposite
+- (NSURL*)dataURL {
+    NSURL *cachePath = [self rootCachePath];
+    
+    cachePath = [cachePath URLByAppendingPathComponent:@"photoData"];
+    cachePath = [cachePath URLByAppendingPathExtension:@"dat"];
+    
+    return cachePath;
+}
+
+- (NSURL*)rootCachePath {
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    NSArray *paths = [fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask];
+    return [paths objectAtIndex:0];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    void (^completionHandler)(BOOL)= ^(BOOL success) {
+        if (!success) {
+            NSLog(@"Uh oh, there was an error.");
+        }
+        NSLog(@"Successfully loaded the thingy!");
+    };
+    
+    UIManagedDocument *document = [[UIManagedDocument alloc] initWithFileURL:[self dataURL]];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[[self dataURL] path]]) {
+        [document openWithCompletionHandler:completionHandler];
+    } else {
+        [document saveToURL:[self dataURL] forSaveOperation:UIDocumentSaveForCreating completionHandler:completionHandler];
+    }
     
     NSLog(@"Hello world!");
 	// Do any additional setup after loading the view, typically from a nib.
