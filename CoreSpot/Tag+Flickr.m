@@ -38,6 +38,17 @@
     return tags;
 }
 
++ (NSArray*)getAllTagsAsStringArray:(UIManagedDocument*)document {
+    NSArray* allTagObjects = [Tag getAllTags:document];
+    NSMutableArray* result = [[NSMutableArray alloc] init];
+    
+    for (Tag* tag in allTagObjects) {
+        [result addObject:tag.name];
+    }
+    
+    return result;
+}
+
 + (Tag*)getTagByName:(NSString*)name document:(UIManagedDocument*)document {
     name = [name capitalizedString];
     NSManagedObjectContext *context = document.managedObjectContext;

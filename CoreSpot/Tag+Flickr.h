@@ -10,5 +10,6 @@
 
 @interface Tag (Flickr)
 + (NSArray*)getAllTags:(UIManagedDocument *)document;
++ (NSArray*)getAllTagsAsStringArray:(UIManagedDocument*)document;
 + (Tag*)getTagByName:(NSString*)name document:(UIManagedDocument*)document;
 @end

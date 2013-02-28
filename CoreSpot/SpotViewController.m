@@ -8,6 +8,7 @@
 
 #import "SpotViewController.h"
 #import "Photo+Flickr.h"
+#import "Tag+Flickr.h"
 
 @interface SpotViewController ()
 
@@ -43,13 +44,15 @@
         }
         NSLog(@"Successfully loaded the thingy!");
         
-        NSLog(@"%@", [Photo getAllPhotos:document]);
+        NSLog(@"%@", [Tag getAllTagsAsStringArray:document]);
         
         //[Photo addPhoto:document data:NULL];
         
+        /*
         [document saveToURL:[self dataURL] forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL success){
             NSLog(@"Saved, presumably.");
         }];
+         */
     };
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:[[self dataURL] path]]) {
