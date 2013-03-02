@@ -118,6 +118,8 @@
     UITableViewCell *cell = data[0];
     UIImage *img = data[1];
     cell.imageView.image = img;
+    
+    [self.tableView reloadData];
 }
 
 - (Photo*)getCorrespondingPhoto:(int)index section:(int)section {
