@@ -15,4 +15,5 @@
 + (Photo*)addPhoto:(UIManagedDocument *)document data:(NSDictionary*)data;
 + (NSArray*)getAllPhotos:(UIManagedDocument *)document;
 + (NSArray*)getRecentPhotos:(UIManagedDocument*)document;
++ (void)reloadPhotos:(UIManagedDocument *)document;
 @end

@@ -72,5 +72,10 @@
     return tag[0];
 }
 
++ (void)reload:(UIManagedDocument*)document {
+     // Force photo to reload (which reloads tags by proxy).
+    [Photo reloadPhotos:document];
+}
+
 
 @end

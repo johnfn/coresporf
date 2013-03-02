@@ -28,19 +28,26 @@
     return self;
 }
 
+- (void)finishedLoading {
+    [[self activityIndicator] stopAnimating];
+    [self.tableView reloadData];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.imagesWithTag = @[];
-    [[self activityIndicator] startAnimating];
+    [self.activityIndicator startAnimating];
+    self.activityIndicator.hidesWhenStopped = true;
+    self.navigationBar.title = self.tag.name;
     
     [DocumentManager withDocumentDo:^(UIManagedDocument* document){
         self.imagesWithTag = [Tag getPhotosFromTag:self.tag.name document:document];
         NSLog(@"%d", self.imagesWithTag.count);
         
-        [[self activityIndicator] stopAnimating];
-        [self.tableView reloadData];
-        
+        [self performSelectorOnMainThread:@selector(finishedLoading)
+                               withObject:NULL
+                            waitUntilDone:YES];
         /* TODO...
         [document saveToURL:[self dataURL] forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL
             NSLog(@"Saved, presumably.");

@@ -14,6 +14,8 @@
 
 @interface SpotViewController ()
 @property (atomic) NSArray* tags;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @end
 
 @implementation SpotViewController
@@ -22,9 +24,39 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.activityIndicator.hidesWhenStopped = true;
+    
     self.tags = @[];
     
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(reloadTagList) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
+    [self updateTagDisplay:false];
+}
+
+- (void)reloadTagList {
+    [self updateTagDisplay:true];
+}
+
+- (void)updateTagDisplay:(bool)shouldReload {
     [DocumentManager withDocumentDo:^(UIManagedDocument* document){
+        if (shouldReload) {
+            dispatch_queue_t downloadQueue = dispatch_queue_create("load taglist", NULL);
+            dispatch_async(downloadQueue, ^{
+                [Tag reload:document];
+                // We need to wait until this thread finishes before we can
+                // update the delay, so we recursively call updateTagDisplay
+                // once that happens.
+                // We're setting shouldReload to false, so the recursive stack
+                // will only ever get 1-deep.
+                [self performSelectorOnMainThread:@selector(updateTagDisplay:)
+                                       withObject:false
+                                    waitUntilDone:YES];
+            });
+            
+            return;
+        }
+        
         NSArray* allTags = [Tag getAllTags:document];
         NSMutableArray* tagsWeWant = [[NSMutableArray alloc] init];
         
@@ -43,6 +75,11 @@
         
         [self.tableView reloadData];
     }];
+    
+    if (!shouldReload) {
+        [self.refreshControl endRefreshing];
+        [self.activityIndicator stopAnimating];
+    }
 }
 
 - (void)didReceiveMemoryWarning
