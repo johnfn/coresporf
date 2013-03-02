@@ -18,7 +18,6 @@
     }
     
     return [[UIImage alloc]initWithData:self.thumbnail];
-    
 }
 
 + (NSArray*)allPictures {

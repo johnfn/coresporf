@@ -28,6 +28,7 @@
         NSArray* allTags = [Tag getAllTags:document];
         NSMutableArray* tagsWeWant = [[NSMutableArray alloc] init];
         
+        // Filter out the tags we don't want.
         for (Tag* tag in allTags) {
             NSString* tagName = [tag.name lowercaseString];
             
@@ -39,7 +40,6 @@
         }
         
         self.tags = tagsWeWant;
-        // Filter out the tags we don't want.
         
         [self.tableView reloadData];
     }];
