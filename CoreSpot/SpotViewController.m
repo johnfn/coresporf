@@ -25,15 +25,23 @@
     self.tags = @[];
     
     [DocumentManager withDocumentDo:^(UIManagedDocument* document){
-        self.tags = [Tag getAllTags:document];
+        NSArray* allTags = [Tag getAllTags:document];
+        NSMutableArray* tagsWeWant = [[NSMutableArray alloc] init];
+        
+        for (Tag* tag in allTags) {
+            NSString* tagName = [tag.name lowercaseString];
+            
+            if ([tagName isEqualToString:@"portrait"]  ||
+                [tagName isEqualToString:@"landscape"] ||
+                [tagName isEqualToString:@"cs193pspot"]) continue;
+            
+            [tagsWeWant addObject:tag];
+        }
+        
+        self.tags = tagsWeWant;
+        // Filter out the tags we don't want.
         
         [self.tableView reloadData];
-        
-        /* TODO...
-        [document saveToURL:[self dataURL] forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL
-            NSLog(@"Saved, presumably.");
-        }];
-        */
     }];
 }
 
