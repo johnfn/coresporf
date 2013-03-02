@@ -103,6 +103,7 @@
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     dispatch_queue_t downloadQueue = dispatch_queue_create("image fetcher", NULL);
+    NSLog(@"%@", self.imageURL);
     dispatch_async(downloadQueue, ^{
         NSData *data;
         UIImage *img;

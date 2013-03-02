@@ -69,7 +69,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     int index = [self.tableView indexPathForSelectedRow].row;
-    Photo *photo = [self.imagesWithTag objectAtIndex:index];
+    int section = [self.tableView indexPathForSelectedRow].section;
+    Photo *photo = [self getCorrespondingPhoto:index section:section];
     NSString *url = photo.url;
     NSString *title = photo.title;
     
@@ -119,14 +120,8 @@
     cell.imageView.image = img;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"TagCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    int index = [indexPath row];
-    int section = [indexPath section];
+- (Photo*)getCorrespondingPhoto:(int)index section:(int)section {
     NSString* sectionChar = [self sectionToString:section];
-    
     Photo *p;
     
     for (p in self.imagesWithTag) {
@@ -137,6 +132,18 @@
             --index;
         }
     }
+    
+    return p;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"TagCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    int index = [indexPath row];
+    int section = [indexPath section];
+    
+    Photo *p = [self getCorrespondingPhoto:index section:section];
     
     cell.textLabel.text = p.title;
     cell.detailTextLabel.text = p.subtitle;

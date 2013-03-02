@@ -42,6 +42,8 @@
     newPhoto.lastAccessed  = nil;
     newPhoto.sectionHeading = [[newPhoto.title substringToIndex:1] uppercaseString];
     
+    NSLog(@"%@", newPhoto.url);
+    
     // For tags, grab the Tag object and add that to the set.
     
     NSString* tags = [data objectForKey:@"tags"];
@@ -101,6 +103,7 @@
     // Now, add all photos.
     for (NSDictionary *dict in [Photo allPictures:true]) {
         [Photo addPhoto:document data:dict];
+        NSLog(@"Hi");
     }
 }
 
