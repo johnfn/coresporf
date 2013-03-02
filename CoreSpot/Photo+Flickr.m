@@ -20,10 +20,10 @@
     return [[UIImage alloc]initWithData:self.thumbnail];
 }
 
-+ (NSArray*)allPictures {
++ (NSArray*)allPictures:(bool)reload {
     static NSArray* pictures = nil;
     
-    if (pictures == nil) {
+    if (pictures == nil || reload) {
         pictures = [FlickrFetcher stanfordPhotos];
     }
     
@@ -99,7 +99,7 @@
     }
     
     // Now, add all photos.
-    for (NSDictionary *dict in [Photo allPictures]) {
+    for (NSDictionary *dict in [Photo allPictures:true]) {
         [Photo addPhoto:document data:dict];
     }
 }

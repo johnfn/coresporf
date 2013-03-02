@@ -38,12 +38,18 @@
     [self updateTagDisplay:true];
 }
 
+- (void)reloadTags:(UIManagedDocument*)document {
+    [Tag reload:document];
+}
+
 - (void)updateTagDisplay:(bool)shouldReload {
     [DocumentManager withDocumentDo:^(UIManagedDocument* document){
         if (shouldReload) {
             dispatch_queue_t downloadQueue = dispatch_queue_create("load taglist", NULL);
             dispatch_async(downloadQueue, ^{
-                [Tag reload:document];
+                [self performSelectorOnMainThread:@selector(reloadTags:)
+                                       withObject:document
+                                    waitUntilDone:YES];
                 // We need to wait until this thread finishes before we can
                 // update the delay, so we recursively call updateTagDisplay
                 // once that happens.
