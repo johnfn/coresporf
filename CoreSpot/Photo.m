@@ -2,7 +2,7 @@
 //  Photo.m
 //  CoreSpot
 //
-//  Created by Grant Mathews on 2/28/13.
+//  Created by Grant Mathews on 3/1/13.
 //  Copyright (c) 2013 johnfn. All rights reserved.
 //
 
@@ -14,10 +14,11 @@
 
 @dynamic lastAccessed;
 @dynamic subtitle;
+@dynamic thumbnail;
+@dynamic thumbnailUrl;
 @dynamic title;
 @dynamic url;
-@dynamic thumbnailUrl;
-@dynamic thumbnail;
+@dynamic sectionHeading;
 @dynamic tag;
 
 @end

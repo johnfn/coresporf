@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UINavigationItem *navigationBar;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) NSArray* imagesWithTag;
+@property (strong, nonatomic) NSMutableString* headings;
 @end
 
 @implementation TagViewController
@@ -36,6 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.headings = [[NSMutableString alloc] init];
     self.imagesWithTag = @[];
     [self.activityIndicator startAnimating];
     self.activityIndicator.hidesWhenStopped = true;
@@ -43,16 +45,24 @@
     
     [DocumentManager withDocumentDo:^(UIManagedDocument* document){
         self.imagesWithTag = [Tag getPhotosFromTag:self.tag.name document:document];
-        NSLog(@"%d", self.imagesWithTag.count);
+        
+        // Sort by heading.
+        self.imagesWithTag = [self.imagesWithTag sortedArrayUsingComparator:^NSComparisonResult(id a, id b){
+            Photo* photoA = (Photo*)a;
+            Photo* photoB = (Photo*)b;
+            
+            return [photoA.sectionHeading compare:photoB.sectionHeading];
+        }];
+        
+        for (Photo* p in self.imagesWithTag) {
+            if ([self.headings rangeOfString:p.sectionHeading].location == NSNotFound) {
+                [self.headings appendString:p.sectionHeading];
+            }
+        }
         
         [self performSelectorOnMainThread:@selector(finishedLoading)
                                withObject:NULL
                             waitUntilDone:YES];
-        /* TODO...
-        [document saveToURL:[self dataURL] forSaveOperation:UIDocumentSaveForOverwriting completionHandler:^(BOOL
-            NSLog(@"Saved, presumably.");
-        }];
-        */
     }];
 }
 
@@ -76,14 +86,31 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    NSMutableSet* seenSections = [[NSMutableSet alloc] init];
+    
+    for (Photo *p in self.imagesWithTag) {
+        [seenSections addObject:p.sectionHeading];
+    }
+    
     // Return the number of sections.
-    return 1;
+    return seenSections.count;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return self.imagesWithTag.count;
+- (NSString*)sectionToString:(int)section {
+    return [self.headings substringWithRange:NSMakeRange(section, 1)];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSString* sectionString = [self sectionToString:section];
+    int count = 0;
+    
+    for (Photo *p in self.imagesWithTag) {
+        if ([p.sectionHeading isEqualToString:sectionString]) {
+            ++count;
+        }
+    }
+    
+    return count;
 }
 
 - (void)finishedLoading:(NSArray*)data {
@@ -97,7 +124,19 @@
     static NSString *CellIdentifier = @"TagCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     int index = [indexPath row];
-    Photo *p = [self.imagesWithTag objectAtIndex:index];
+    int section = [indexPath section];
+    NSString* sectionChar = [self sectionToString:section];
+    
+    Photo *p;
+    
+    for (p in self.imagesWithTag) {
+        if ([p.sectionHeading isEqualToString:sectionChar]) {
+            if (index == 0) {
+                break;
+            }
+            --index;
+        }
+    }
     
     cell.textLabel.text = p.title;
     cell.detailTextLabel.text = p.subtitle;

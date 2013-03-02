@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B2C887816E1CC99008BE988 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B2C887716E1CC99008BE988 /* Photo.m */; };
 		8B44741316DF6F5B000CF4F9 /* TagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B44741216DF6F5B000CF4F9 /* TagViewController.m */; };
 		8B44741616DFEE95000CF4F9 /* DocumentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B44741516DFEE95000CF4F9 /* DocumentManager.m */; };
 		8B6632BD16DF065F00862119 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6632BC16DF065F00862119 /* UIKit.framework */; };
@@ -30,10 +31,11 @@
 		8B66331016DF53BD00862119 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B66330F16DF53BD00862119 /* Tag.m */; };
 		8B66331316DF53F800862119 /* Tag+Flickr.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B66331216DF53F800862119 /* Tag+Flickr.m */; };
 		8B95FBB416DFFD4A00BE675C /* RecentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B95FBB316DFFD4A00BE675C /* RecentViewController.m */; };
-		8B95FBBE16E0188A00BE675C /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B95FBBD16E0188A00BE675C /* Photo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B2C887616E1CC99008BE988 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		8B2C887716E1CC99008BE988 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		8B44741116DF6F5B000CF4F9 /* TagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagViewController.h; sourceTree = "<group>"; };
 		8B44741216DF6F5B000CF4F9 /* TagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagViewController.m; sourceTree = "<group>"; };
 		8B44741416DFEE95000CF4F9 /* DocumentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentManager.h; sourceTree = "<group>"; };
@@ -72,8 +74,6 @@
 		8B66331216DF53F800862119 /* Tag+Flickr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Tag+Flickr.m"; sourceTree = "<group>"; };
 		8B95FBB216DFFD4A00BE675C /* RecentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentViewController.h; sourceTree = "<group>"; };
 		8B95FBB316DFFD4A00BE675C /* RecentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentViewController.m; sourceTree = "<group>"; };
-		8B95FBBC16E0188A00BE675C /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
-		8B95FBBD16E0188A00BE675C /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,8 +158,8 @@
 		8B6632E916DF23C300862119 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8B95FBBC16E0188A00BE675C /* Photo.h */,
-				8B95FBBD16E0188A00BE675C /* Photo.m */,
+				8B2C887616E1CC99008BE988 /* Photo.h */,
+				8B2C887716E1CC99008BE988 /* Photo.m */,
 				8B44741416DFEE95000CF4F9 /* DocumentManager.h */,
 				8B44741516DFEE95000CF4F9 /* DocumentManager.m */,
 				8B66330E16DF53BD00862119 /* Tag.h */,
@@ -258,7 +258,7 @@
 				8B44741316DF6F5B000CF4F9 /* TagViewController.m in Sources */,
 				8B44741616DFEE95000CF4F9 /* DocumentManager.m in Sources */,
 				8B95FBB416DFFD4A00BE675C /* RecentViewController.m in Sources */,
-				8B95FBBE16E0188A00BE675C /* Photo.m in Sources */,
+				8B2C887816E1CC99008BE988 /* Photo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

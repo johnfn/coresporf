@@ -2,7 +2,7 @@
 //  Photo.h
 //  CoreSpot
 //
-//  Created by Grant Mathews on 2/28/13.
+//  Created by Grant Mathews on 3/1/13.
 //  Copyright (c) 2013 johnfn. All rights reserved.
 //
 
@@ -15,10 +15,11 @@
 
 @property (nonatomic, retain) NSDate * lastAccessed;
 @property (nonatomic, retain) NSString * subtitle;
+@property (nonatomic, retain) NSData * thumbnail;
+@property (nonatomic, retain) NSString * thumbnailUrl;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * url;
-@property (nonatomic, retain) NSString * thumbnailUrl;
-@property (nonatomic, retain) NSData * thumbnail;
+@property (nonatomic, retain) NSString * sectionHeading;
 @property (nonatomic, retain) NSSet *tag;
 @end
 

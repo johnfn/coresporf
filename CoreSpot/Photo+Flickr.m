@@ -40,6 +40,7 @@
     newPhoto.thumbnailUrl = [[FlickrFetcher urlForPhoto:data format:FlickrPhotoFormatSquare] absoluteString];
     newPhoto.subtitle      = [descDict objectForKey:@"_content"];
     newPhoto.lastAccessed  = nil;
+    newPhoto.sectionHeading = [[newPhoto.title substringToIndex:1] uppercaseString];
     
     // For tags, grab the Tag object and add that to the set.
     
